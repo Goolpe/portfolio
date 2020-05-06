@@ -1,8 +1,35 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+enum BarleyStatus{
+  stopped,
+  running,
+  paused
+}
 
 class BarleyBreakProvider with ChangeNotifier{
   final List<int> initList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
+  final List<Color> colorList = [
+    Colors.transparent, 
+    Colors.amber, 
+    Colors.blue, 
+    Colors.cyan, 
+    Colors.deepOrange, 
+    Colors.indigo, 
+    Colors.green, 
+    Colors.lime, 
+    Colors.orange, 
+    Colors.pink, 
+    Colors.purple, 
+    Colors.teal, 
+    Colors.redAccent, 
+    Colors.grey,
+    Colors.blueGrey, 
+    Colors.black, 
+  ];
 
   List<int> _list = [];
   List<int> get list => _list;
@@ -12,13 +39,24 @@ class BarleyBreakProvider with ChangeNotifier{
 
   bool _success = false;
   bool get success => _success;
+
+  BarleyStatus _barleyStatus = BarleyStatus.stopped;
+  BarleyStatus get barleyStatus => _barleyStatus;
+
+  int _counter = 0;
+  int get counter => _counter;
+
+  Timer _timer;
   
   void init(){
+    _barleyStatus = BarleyStatus.stopped;
+    _timer?.cancel();
     _list = List.from(initList);
     _createMatrix();
   }
 
   void _createMatrix(){
+    _counter = 0;
     _success = false;
     _matrixList = [[]];
     for(int i = 0, mI = 0; i < list.length; i++){
@@ -31,9 +69,25 @@ class BarleyBreakProvider with ChangeNotifier{
     notifyListeners();
   }
   
-  void start(){
-    _list.shuffle();
-    _createMatrix();
+  void manage(){
+    switch(_barleyStatus){
+      case BarleyStatus.running: pause(); break;
+      case BarleyStatus.paused: _resume(); break;
+      case BarleyStatus.stopped: 
+        _list.shuffle();
+        _resume();
+        _createMatrix(); 
+        break;
+    }
+  }
+
+  void _resume(){
+    _barleyStatus = BarleyStatus.running;
+    notifyListeners();
+    _timer = Timer.periodic(Duration(seconds: 1), (_){
+      _counter++;
+      notifyListeners();
+    });
   }
 
   void move(
@@ -41,7 +95,7 @@ class BarleyBreakProvider with ChangeNotifier{
     int index, 
     int el
   ){
-    if(el != 0){
+    if(el != 0 && _barleyStatus == BarleyStatus.running){
       int listIndex = index + matrixIndex*4;
       if(listIndex > 0){
         _update(matrixIndex, index, listIndex, -1, el);
@@ -80,13 +134,32 @@ class BarleyBreakProvider with ChangeNotifier{
   }
 
   void _check(){
-    if(listEquals(_list,initList)){
+    if(_barleyStatus == BarleyStatus.running && listEquals(_list,initList)){
       _finish();
     }
   }
 
+  void pause(){
+    if(_barleyStatus == BarleyStatus.running){
+      _barleyStatus = BarleyStatus.paused;
+      _timer?.cancel();
+      notifyListeners();
+    }
+  }
+  
   void _finish(){
     _success = true;
+    _barleyStatus = BarleyStatus.stopped;
+    _timer?.cancel();
     notifyListeners();
+  }
+
+  String manageText(){
+    switch(_barleyStatus){
+      case BarleyStatus.paused: return 'resume';
+      case BarleyStatus.stopped: return 'start';
+      case BarleyStatus.running: return 'pause';
+      default: return 'start';
+    }
   }
 }
