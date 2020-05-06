@@ -8,7 +8,9 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BarleyBreakProvider>(
       builder: (context, value, child) {
-        return Column(
+        return value.success
+        ? Text('You win!')
+        : Column(
           children: value.matrixList.asMap().map((int matrixIndex, List<int> matrixEl) => 
             MapEntry(matrixIndex, 
               Row(
@@ -22,7 +24,7 @@ class GameScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         margin: EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(color: el == 0 ? Colors.transparent : Colors.black),
                           borderRadius: BorderRadius.circular(16)
                         ),
                         child: Text(el == 0 ? '' : '$el'),
