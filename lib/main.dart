@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:portfolio/index.dart';
 import 'package:provider/provider.dart';
 
@@ -11,16 +10,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<HomeProvider>(
+          create: (context) => HomeProvider(),
+        ),
         ChangeNotifierProvider<BarleyBreakProvider>(
           create: (context) => BarleyBreakProvider()..init(),
         ),
         ChangeNotifierProvider<G2048Provider>(
           create: (context) => G2048Provider(),
-        )
+        ),
       ],
-      child: GetMaterialApp(
+      child: MaterialApp(
         title: 'Goolpe',
         debugShowCheckedModeBanner: false,
+        builder: (BuildContext context, Widget child) {
+          return ScrollConfiguration(
+            behavior: PortfolioOverScrollBehavior(),
+            child: child
+          );
+        },
         home: HomeScreen(),
       )
     );

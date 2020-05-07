@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:portfolio/index.dart';
+import 'package:provider/provider.dart';
 
 class PortfolioCard extends StatelessWidget {
   PortfolioCard({
     @required this.asset,
     @required this.name,
-    this.child
+    this.child,
+    this.images = const []
   });
 
   final String asset;
   final String name;
   final Widget child;
+  final List<String> images;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,13 @@ class PortfolioCard extends StatelessWidget {
             ),
             child: Stack(
               children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(asset, fit: BoxFit.cover)
+                Container(
+                  height: 150,
+                  width: 150,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(asset, fit: BoxFit.contain)
+                  ),
                 ),
                 Positioned.fill(
                   child: Material(
@@ -44,11 +50,12 @@ class PortfolioCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(8),
-                      onTap: () => Get.dialog(
+                      onTap: () => Provider.of<HomeProvider>(context,listen: false).show(
                         AppScreen(
                           name: name,
                           asset: asset,
-                          child: child
+                          child: child,
+                          images: images,
                         )
                       ),
                     ),
