@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:portfolio/index.dart';
 import 'package:provider/provider.dart';
 
@@ -12,14 +13,14 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<BarleyBreakProvider>(
           create: (context) => BarleyBreakProvider()..init(),
+        ),
+        ChangeNotifierProvider<G2048Provider>(
+          create: (context) => G2048Provider(),
         )
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
+        title: 'Goolpe',
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
         home: HomeScreen(),
       )
     );
