@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/index.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ class PortfolioDialog extends StatefulWidget {
     @required this.child,
     @required this.name,
     @required this.asset,
+    @required this.images,
     this.description = ''
   });
 
@@ -14,6 +16,7 @@ class PortfolioDialog extends StatefulWidget {
   final String name;
   final String asset;
   final String description;
+  final List<String> images;
 
   @override
   _PortfolioDialogState createState() => _PortfolioDialogState();
@@ -22,6 +25,7 @@ class PortfolioDialog extends StatefulWidget {
 class _PortfolioDialogState extends State<PortfolioDialog> {
 
   bool _showDetails = false;
+  final CarouselController _carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +60,12 @@ class _PortfolioDialogState extends State<PortfolioDialog> {
                       Container(
                         height: 400,
                         width: 300,
-                        child: widget.child,
+                        child: _child(),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Row(
                               children: <Widget>[
@@ -166,10 +171,67 @@ class _PortfolioDialogState extends State<PortfolioDialog> {
           alignment: Alignment.center,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: widget.child,
+            child: _child(),
           )
         ),
       ]
+    );
+  }
+
+  Widget _child(){
+    return widget.child != null
+    ? widget.child
+    : Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        CarouselSlider(
+          carouselController: _carouselController,
+          options: CarouselOptions(
+            height: 400.0,
+          ),
+          items: widget.images.map((String image) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  alignment: Alignment.center,
+                  child: Image.asset(image, fit: BoxFit.cover)
+                );
+              },
+            );
+          }).toList(),
+        ),
+        Positioned(
+          left: 0,
+          top: 0,
+          bottom: 0,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              child: SizedBox(
+                width: 40,
+                child: Icon(Icons.chevron_left),
+              ),
+              onTap: () => _carouselController.previousPage()
+            )
+          ),
+        ),
+        Positioned(
+          right: 0,
+          top: 0,
+          bottom: 0,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              child: SizedBox(
+                width: 40,
+                child: Icon(Icons.chevron_right),
+              ),
+              onTap: () => _carouselController.nextPage(),
+            )
+          ),
+        ),
+      ],
     );
   }
 }

@@ -15,6 +15,7 @@ class HomeProvider with ChangeNotifier{
         'assets/nevoffice/screenshot_4.png',
         'assets/nevoffice/screenshot_5.png',
       ],
+      description: '',
     ),
     PortfolioCard(
       asset: 'assets/sprout/sprout.webp', 
@@ -27,6 +28,7 @@ class HomeProvider with ChangeNotifier{
         'assets/sprout/screenshot_4.webp',
         'assets/sprout/screenshot_5.webp',
       ],
+      description: '',
     ),
     PortfolioCard(
       asset: 'assets/sprout_prom/sprout_prom.webp', 
@@ -37,6 +39,7 @@ class HomeProvider with ChangeNotifier{
         'assets/sprout_prom/screenshot_2.webp',
         'assets/sprout_prom/screenshot_3.webp',
       ],
+      description: '',
     )
   ];
 
@@ -49,11 +52,13 @@ class HomeProvider with ChangeNotifier{
         'assets/bikes/1.png',
         'assets/bikes/2.png',
       ],
+      description: '',
     ),
     PortfolioCard(
       asset: 'assets/barley_break.png', 
       name: 'Barley Break', 
-      child: BarleyScreen()
+      child: BarleyScreen(),
+      description: '',
     ),
     PortfolioCard(
       asset: 'assets/rr/logo.jpg', 
@@ -63,13 +68,14 @@ class HomeProvider with ChangeNotifier{
         'assets/rr/screenshot_1.png',
         'assets/rr/screenshot_2.png',
       ],
+      description: '',
     ),
   ];
 
-  AppScreen _screen;
-  AppScreen get screen => _screen;
+  PortfolioDialog _screen;
+  PortfolioDialog get screen => _screen;
 
-  void show(AppScreen el){
+  void show(PortfolioDialog el){
     _screen = el;
     notifyListeners();
   }

@@ -6,6 +6,7 @@ class PortfolioCard extends StatelessWidget {
   PortfolioCard({
     @required this.asset,
     @required this.name,
+    this.description,
     this.child,
     this.images = const []
   });
@@ -14,6 +15,7 @@ class PortfolioCard extends StatelessWidget {
   final String name;
   final Widget child;
   final List<String> images;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +53,12 @@ class PortfolioCard extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(8),
                       onTap: () => Provider.of<HomeProvider>(context,listen: false).show(
-                        AppScreen(
+                        PortfolioDialog(
                           name: name,
                           asset: asset,
                           child: child,
                           images: images,
+                          description: description,
                         )
                       ),
                     ),
