@@ -35,7 +35,7 @@ class PortfolioCard extends StatelessWidget {
                   width: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(URL_ASSET + details.asset, fit: BoxFit.contain)
+                    child: Image.network(URL_ASSET + details.logo, fit: BoxFit.contain)
                   ),
                 ),
                 Positioned.fill(

@@ -14,7 +14,7 @@ class PortfolioDetails extends StatefulWidget {
     this.id,
     this.child,
     @required this.name,
-    @required this.asset,
+    @required this.logo,
     this.images,
     this.description = '',
     this.googlePlayLink,
@@ -26,7 +26,7 @@ class PortfolioDetails extends StatefulWidget {
   final int id;
   final Widget child;
   final String name;
-  final String asset;
+  final String logo;
   final String description;
   final List<String> images;
   final String googlePlayLink;
@@ -101,7 +101,7 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(URL_ASSET + widget.asset, 
+                child: Image.network(URL_ASSET + widget.logo, 
                   fit: BoxFit.contain,
                   height: 60,
                   width: 60,
