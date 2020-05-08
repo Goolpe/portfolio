@@ -15,7 +15,6 @@ class BarleyScreen extends StatelessWidget {
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
 
-
     return Consumer<BarleyBreakProvider>(
       builder: (context, value, child) {
         return value.success
@@ -42,13 +41,13 @@ class BarleyScreen extends StatelessWidget {
                       MapEntry(index, 
                         GestureDetector(
                           child: Container(
-                            width: 50,
-                            height: 50,
+                            width: 40,
+                            height: 40,
                             alignment: Alignment.center,
                             margin: EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               color: value.colorList[el],
-                              borderRadius: BorderRadius.circular(16)
+                              borderRadius: BorderRadius.circular(8)
                             ),
                             child: Text(el == 0 ? '' : '$el', 
                               style: TextStyle(
@@ -74,30 +73,28 @@ class BarleyScreen extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(
                     height: 50,
-                    width: 100,
+                    width: 80,
                     child: RaisedButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)
                       ),
                       color: Colors.green,
                       textColor: Colors.white,
-                      child: Text(Provider.of<BarleyBreakProvider>(context,listen: false).manageText(), 
-                        style: TextStyle(fontSize: 18)
-                      ),
+                      child: Text(Provider.of<BarleyBreakProvider>(context,listen: false).manageText()),
                       elevation: 0,
                       onPressed: () => Provider.of<BarleyBreakProvider>(context,listen: false).manage(),
                     ),
                   ),
                   SizedBox(
                     height: 50,
-                    width: 100,
+                    width: 80,
                       child: RaisedButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)
                       ),
                       color: Colors.blueGrey,
                       textColor: Colors.white,
-                      child: Text('reset',style: TextStyle(fontSize: 18)),
+                      child: Text('reset'),
                       elevation: 0,
                       onPressed: () => Provider.of<BarleyBreakProvider>(context,listen: false).init(),
                     ),

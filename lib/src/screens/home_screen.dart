@@ -11,41 +11,43 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Consumer<HomeProvider>(
-          builder: (context, value, _) {
-            return MediaQuery.of(context).orientation == Orientation.landscape
-            ? Row(
-              children: _listHome(value)
-            )
-            : ListView(
-              children: _listHome(value)
+          builder: (context, HomeProvider value, _) {
+            return MediaQuery.of(context).orientation == Orientation.portrait
+              ? ListView(
+                children: <Widget>[
+                  SizedBox(
+                    height: 130,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: value.cards.map((PortfolioDetails details){
+                        return PortfolioCard(details: details);
+                      }).toList(),
+                    )
+                  ),
+                  value.screen
+                ],
+              )
+              : Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 130,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: value.cards.map((PortfolioDetails details){
+                      return PortfolioCard(details: details);
+                    }).toList(),
+                  ),
+                ),
+                if(value.screen != null)
+                  Expanded(
+                    child: value.screen
+                  )
+              ]
             );
           }
         )
       )
     );
-  }
-
-  List<Widget> _listHome(value){
-    return <Widget>[
-      Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            PortfolioListCard(
-              title: 'Commercial Apps', 
-              cards: value.cardsStore
-            ),
-            PortfolioListCard(
-              title: 'Other', 
-              cards: value.cardsOther
-            ),
-          ],
-        ),
-      ),
-      if(value.screen != null)
-        Expanded(
-          child: value.screen
-        )
-    ];
   }
 }

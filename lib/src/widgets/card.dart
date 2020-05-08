@@ -4,27 +4,19 @@ import 'package:provider/provider.dart';
 
 class PortfolioCard extends StatelessWidget {
   PortfolioCard({
-    @required this.asset,
-    @required this.name,
-    this.description,
-    this.child,
-    this.images = const []
+    this.details,
   });
 
-  final String asset;
-  final String name;
-  final Widget child;
-  final List<String> images;
-  final String description;
+  final PortfolioDetails details;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+      width: 100,
+      height: 100,
+      margin: EdgeInsets.all(16),
+      child: Consumer<HomeProvider>(
+        builder: (context, value, _) => 
           Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -39,11 +31,11 @@ class PortfolioCard extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  height: 150,
-                  width: 150,
+                  height: 100,
+                  width: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(asset, fit: BoxFit.contain)
+                    child: Image.asset(details.asset, fit: BoxFit.contain)
                   ),
                 ),
                 Positioned.fill(
@@ -52,26 +44,13 @@ class PortfolioCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(8),
-                      onTap: () => Provider.of<HomeProvider>(context,listen: false).show(
-                        PortfolioDialog(
-                          name: name,
-                          asset: asset,
-                          child: child,
-                          images: images,
-                          description: description,
-                        )
-                      ),
+                      onTap: () => Provider.of<HomeProvider>(context,listen: false).show(details, context),
                     ),
                   ), 
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(name, style: TextStyle(fontSize: 18)),
-          ),
-        ]
       ),
     );
   }

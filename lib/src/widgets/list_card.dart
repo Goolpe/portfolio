@@ -4,11 +4,11 @@ import 'package:portfolio/index.dart';
 class PortfolioListCard extends StatelessWidget {
   PortfolioListCard({
     @required this.title,
-    @required this.cards
+    @required this.details
   });
 
   final String title;
-  final List<PortfolioCard> cards;
+  final List<PortfolioDetails> details;
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +18,19 @@ class PortfolioListCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: Text(title, style: TextStyle(
               fontSize: 30
             )),
           ),
-          Divider(),
           MediaQuery.of(context).orientation == Orientation.landscape 
           ? SizedBox(
             height: 250,
-            child: ListView(
+            child: ListView.builder(
               shrinkWrap: true,
-              children: cards,
               scrollDirection: Axis.horizontal,
+              itemCount: details.length,
+              itemBuilder: (context, index) => PortfolioCard(details: details[index])
             ),
           )
           : GridView.builder(
@@ -38,10 +38,10 @@ class PortfolioListCard extends StatelessWidget {
               crossAxisCount: 2, 
               childAspectRatio: 1/1.2
             ),
-            itemCount: cards.length,
+            itemCount: details.length,
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(vertical: 8),
-            itemBuilder: (context, index) => cards[index]
+            itemBuilder: (context, index) => PortfolioCard(details: details[index])
           )
         ]
       ),

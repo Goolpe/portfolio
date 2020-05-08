@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeProvider>(
-          create: (context) => HomeProvider(),
+          create: (context) => HomeProvider()..init(),
         ),
         ChangeNotifierProvider<BarleyBreakProvider>(
           create: (context) => BarleyBreakProvider()..init(),
