@@ -52,86 +52,93 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
       ? Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: _underDetails()
+        children: <Widget>[
+          _card(),
+          Expanded(
+            child: _description(),
+          )
+        ]
       )
       : ListView(
         shrinkWrap: true,
-        children: _underDetails()
+        children: <Widget>[
+          _card(),
+          _description(),
+        ]
       )
     );
   }
 
-  List<Widget> _underDetails(){
-    return <Widget>[
-      Container(
-        height: 400,
-        width: 225,
-        margin: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(
-            color: Color(0xFF000000).withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 6
-          )]
-        ),
-        alignment: Alignment.center,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: _child(),
-        )
+  Widget _card(){
+    return Container(
+      height: 400,
+      width: 225,
+      margin: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [BoxShadow(
+          color: Color(0xFF000000).withOpacity(0.1),
+          blurRadius: 10,
+          spreadRadius: 6
+        )]
       ),
-      Flexible(
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      alignment: Alignment.center,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: _child(),
+      )
+    );
+  }
+
+  Widget _description(){
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(widget.asset, 
-                      fit: BoxFit.contain,
-                      height: 60,
-                      width: 60,
-                    )
-                  ),
-                  SizedBox(width: 10),
-                  Text(widget.name,
-                    style: TextStyle(
-                      fontSize: 24, 
-                      fontWeight: FontWeight.bold
-                    )
-                  ),
-                ],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(widget.asset, 
+                  fit: BoxFit.contain,
+                  height: 60,
+                  width: 60,
+                )
               ),
-              SizedBox(height: 16),
-              Row(
-                children: <Widget>[
-                  _socialButton(widget.googlePlayLink, LinkType.googlePlay),
-                  SizedBox(width: 16),
-                  _socialButton(widget.appStoreLink, LinkType.appStore),
-                ],
+              SizedBox(width: 10),
+              Text(widget.name,
+                style: TextStyle(
+                  fontSize: 24, 
+                  fontWeight: FontWeight.bold
+                )
               ),
-              if(widget.description.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Text(widget.description),
-                ),
-              if(widget.githubLink != null)
-                Row(
-                  children: <Widget>[
-                    Text('Code is available on '),
-                    _socialButton(widget.githubLink, LinkType.github),
-                  ],
-                ),
             ],
           ),
-        ),
-      )
-    ];
+          SizedBox(height: 16),
+          Row(
+            children: <Widget>[
+              _socialButton(widget.googlePlayLink, LinkType.googlePlay),
+              SizedBox(width: 16),
+              _socialButton(widget.appStoreLink, LinkType.appStore),
+            ],
+          ),
+          if(widget.description.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Text(widget.description),
+            ),
+          if(widget.githubLink != null)
+            Row(
+              children: <Widget>[
+                Text('Code is available on '),
+                _socialButton(widget.githubLink, LinkType.github),
+              ],
+            ),
+        ],
+      ),
+    );
   }
 
   Widget _child(){
