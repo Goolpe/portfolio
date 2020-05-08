@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/index.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,13 +8,13 @@ enum LinkType{
   github
 }
 
-class PortfolioDetails extends StatefulWidget {
+class PortfolioDetails extends StatelessWidget {
   PortfolioDetails({
     this.id,
     this.child,
     @required this.name,
     @required this.logo,
-    this.images,
+    this.images = const [],
     this.description = '',
     this.googlePlayLink,
     this.appStoreLink,
@@ -35,14 +34,6 @@ class PortfolioDetails extends StatefulWidget {
   final CardType cardType;
 
   @override
-  _PortfolioDetailsState createState() => _PortfolioDetailsState();
-}
-
-class _PortfolioDetailsState extends State<PortfolioDetails> {
-
-  final CarouselController _carouselController = CarouselController();
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       width: 600,
@@ -51,9 +42,15 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          _card(),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: _card(context),
+          ),
           Expanded(
-            child: _description(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: _description(),
+            ),
           )
         ]
       )
@@ -61,7 +58,7 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
-          _card(),
+          _card(context),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: _description(),
@@ -71,12 +68,12 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
     );
   }
 
-  Widget _card(){
+  Widget _card(context){
     return Container(
       height: 400,
       width: 225,
-      margin: EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: MediaQuery.of(context).orientation == Orientation.landscape
+      ? BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [BoxShadow(
@@ -84,12 +81,9 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
           blurRadius: 10,
           spreadRadius: 6
         )]
-      ),
+      ) : BoxDecoration(),
       alignment: Alignment.center,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: _child(),
-      )
+      child:  _child(),
     );
   }
 
@@ -103,14 +97,14 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(URL_ASSET + widget.logo, 
+                child: Image.network(URL_ASSET + logo, 
                   fit: BoxFit.contain,
                   height: 60,
                   width: 60,
                 )
               ),
               SizedBox(width: 10),
-              Text(widget.name,
+              Text(name,
                 style: TextStyle(
                   fontSize: 24, 
                   fontWeight: FontWeight.bold
@@ -121,21 +115,21 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
           SizedBox(height: 16),
           Row(
             children: <Widget>[
-              _socialButton(widget.googlePlayLink, LinkType.googlePlay),
+              _socialButton(googlePlayLink, LinkType.googlePlay),
               SizedBox(width: 16),
-              _socialButton(widget.appStoreLink, LinkType.appStore),
+              _socialButton(appStoreLink, LinkType.appStore),
             ],
           ),
-          if(widget.description.isNotEmpty)
+          if(description.isNotEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Text(widget.description),
+              child: Text(description),
             ),
-          if(widget.githubLink != null)
+          if(githubLink != null)
             Row(
               children: <Widget>[
                 Text('Code is available on '),
-                _socialButton(widget.githubLink, LinkType.github),
+                _socialButton(githubLink, LinkType.github),
               ],
             ),
         ],
@@ -144,61 +138,12 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
   }
 
   Widget _child(){
-    return widget.child != null
-    ? widget.child
-    : Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        CarouselSlider(
-          carouselController: _carouselController,
-          options: CarouselOptions(
-            height: 400,
-            viewportFraction: 1,
-          ),
-          items: widget.images.map((String image) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                  height: MediaQuery.of(context).size.height,
-                  alignment: Alignment.center,
-                  child: Image.network(URL_ASSET + image, fit: BoxFit.cover)
-                );
-              },
-            );
-          }).toList(),
-        ),
-        Positioned(
-          left: 0,
-          top: 0,
-          bottom: 0,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              child: SizedBox(
-                width: 40,
-                child: Icon(Icons.chevron_left),
-              ),
-              onTap: () => _carouselController.previousPage()
-            )
-          ),
-        ),
-        Positioned(
-          right: 0,
-          top: 0,
-          bottom: 0,
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              child: SizedBox(
-                width: 40,
-                child: Icon(Icons.chevron_right),
-              ),
-              onTap: () => _carouselController.nextPage(),
-            )
-          ),
-        ),
-      ],
-    );
+    return child != null
+    ? ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: child
+    )
+    : PortfolioImages(images: images);
   }
 
   Widget _socialButton(String link, LinkType type){
