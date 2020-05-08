@@ -101,7 +101,7 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(widget.asset, 
+                child: Image.network(URL_ASSET + widget.asset, 
                   fit: BoxFit.contain,
                   height: 60,
                   width: 60,
@@ -159,7 +159,7 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
                 return Container(
                   height: MediaQuery.of(context).size.height,
                   alignment: Alignment.center,
-                  child: Image.asset(image, fit: BoxFit.cover)
+                  child: Image.network(URL_ASSET + image, fit: BoxFit.cover)
                 );
               },
             );
@@ -206,7 +206,7 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
       child: Container(
         // width: 150,
         height: 40,
-        child: Image.asset('assets/' + _logo(type)),
+        child: Image.network(URL_ASSET + _logo(type)),
       ),
       onTap: () async {
         if (await canLaunch(link)) {

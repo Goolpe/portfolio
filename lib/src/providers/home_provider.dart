@@ -12,15 +12,15 @@ class HomeProvider with ChangeNotifier{
   final List<PortfolioDetails> cards = [
     PortfolioDetails(
       id: 0,
-      asset: 'assets/nevoffice/nevoffice.webp', 
+      asset: 'nevoffice/nevoffice.webp', 
       name: 'Не в офисе\n[Nevoffice]', 
       images: [
-        'assets/nevoffice/screenshot_0.png',
-        'assets/nevoffice/screenshot_1.png',
-        'assets/nevoffice/screenshot_2.png',
-        'assets/nevoffice/screenshot_3.png',
-        'assets/nevoffice/screenshot_4.png',
-        'assets/nevoffice/screenshot_5.png',
+        'nevoffice/screenshot_0.png',
+        'nevoffice/screenshot_1.png',
+        'nevoffice/screenshot_2.png',
+        'nevoffice/screenshot_3.png',
+        'nevoffice/screenshot_4.png',
+        'nevoffice/screenshot_5.png',
       ],
       description:  'Android application allowing to record, save in SQLite '
                     'and upload to the server throw GraphQL: locations, ' 
@@ -36,15 +36,15 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 1,
-      asset: 'assets/sprout/sprout.webp', 
+      asset: 'sprout/sprout.webp', 
       name: 'Росток [Rostock]', 
       images: [
-        'assets/sprout/screenshot_0.webp',
-        'assets/sprout/screenshot_1.webp',
-        'assets/sprout/screenshot_2.webp',
-        'assets/sprout/screenshot_3.webp',
-        'assets/sprout/screenshot_4.webp',
-        'assets/sprout/screenshot_5.webp',
+        'sprout/screenshot_0.webp',
+        'sprout/screenshot_1.webp',
+        'sprout/screenshot_2.webp',
+        'sprout/screenshot_3.webp',
+        'sprout/screenshot_4.webp',
+        'sprout/screenshot_5.webp',
       ],
       description:  'Application for Android and iOS, that allow '
                     'to create tasks for promoters and track them.\n\n'
@@ -62,13 +62,13 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 2,
-      asset: 'assets/sprout_prom/sprout_prom.webp', 
+      asset: 'sprout_prom/sprout_prom.webp', 
       name: 'Росток Пром.\n[Rostock Promoter]', 
       images: [
-        'assets/sprout_prom/screenshot_0.webp',
-        'assets/sprout_prom/screenshot_1.webp',
-        'assets/sprout_prom/screenshot_2.webp',
-        'assets/sprout_prom/screenshot_3.webp',
+        'sprout_prom/screenshot_0.webp',
+        'sprout_prom/screenshot_1.webp',
+        'sprout_prom/screenshot_2.webp',
+        'sprout_prom/screenshot_3.webp',
       ],
       description: 'Previous version of Nevoffice application for Android and iOS, that allow '
                     'to record, save in SQLite '
@@ -86,12 +86,12 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 3,
-      asset: 'assets/bikes/bike.png', 
+      asset: 'bikes/bike.png', 
       name: 'Bikes',
       images: [
-        'assets/bikes/0.png',
-        'assets/bikes/1.png',
-        'assets/bikes/2.png',
+        'bikes/0.png',
+        'bikes/1.png',
+        'bikes/2.png',
       ],
       description: 'Demo application. List of bikes parsed from json. '
                     'Ability to remove items and add new.\n\n'
@@ -105,7 +105,7 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 4,
-      asset: 'assets/barley_break.png', 
+      asset: 'barley_break.png', 
       name: 'Barley Break', 
       child: BarleyScreen(),
       description:  'Demo game application.\n\n'
