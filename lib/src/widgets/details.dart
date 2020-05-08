@@ -45,9 +45,7 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
-      width: MediaQuery.of(context).orientation == Orientation.landscape
-      ? 600 : 225,
+      width: 600,
       child: MediaQuery.of(context).orientation == Orientation.landscape
       ? Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,9 +59,13 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
       )
       : ListView(
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           _card(),
-          _description(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _description(),
+          ),
         ]
       )
     );
@@ -150,8 +152,8 @@ class _PortfolioDetailsState extends State<PortfolioDetails> {
         CarouselSlider(
           carouselController: _carouselController,
           options: CarouselOptions(
-            height: 400.0,
-            viewportFraction: 1
+            height: 400,
+            viewportFraction: 1,
           ),
           items: widget.images.map((String image) {
             return Builder(

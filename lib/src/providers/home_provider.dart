@@ -12,15 +12,15 @@ class HomeProvider with ChangeNotifier{
   final List<PortfolioDetails> cards = [
     PortfolioDetails(
       id: 0,
-      logo: 'nevoffice/logo.webp', 
+      logo: 'nevoffice/logo.jpg', 
       name: 'Не в офисе\n[Nevoffice]', 
       images: [
-        'nevoffice/0.png',
-        'nevoffice/1.png',
-        'nevoffice/2.png',
-        'nevoffice/3.png',
-        'nevoffice/4.png',
-        'nevoffice/5.png',
+        'nevoffice/0.jpg',
+        'nevoffice/1.jpg',
+        'nevoffice/2.jpg',
+        'nevoffice/3.jpg',
+        'nevoffice/4.jpg',
+        'nevoffice/5.jpg',
       ],
       description:  'Android application allowing to record, save in SQLite '
                     'and upload to the server throw GraphQL: locations, ' 
@@ -36,15 +36,15 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 1,
-      logo: 'sprout/logo.webp', 
+      logo: 'sprout/logo.jpg', 
       name: 'Росток [Rostock]', 
       images: [
-        'sprout/0.webp',
-        'sprout/1.webp',
-        'sprout/2.webp',
-        'sprout/3.webp',
-        'sprout/4.webp',
-        'sprout/5.webp',
+        'sprout/0.jpg',
+        'sprout/1.jpg',
+        'sprout/2.jpg',
+        'sprout/3.jpg',
+        'sprout/4.jpg',
+        'sprout/5.jpg',
       ],
       description:  'Application for Android and iOS, that allow '
                     'to create tasks for promoters and track them.\n\n'
@@ -62,13 +62,13 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 2,
-      logo: 'sprout_prom/logo.webp', 
+      logo: 'sprout_prom/logo.jpg', 
       name: 'Росток Пром.\n[Rostock Promoter]', 
       images: [
-        'sprout_prom/0.webp',
-        'sprout_prom/1.webp',
-        'sprout_prom/2.webp',
-        'sprout_prom/3.webp',
+        'sprout_prom/0.jpg',
+        'sprout_prom/1.jpg',
+        'sprout_prom/2.jpg',
+        'sprout_prom/3.jpg',
       ],
       description: 'Previous version of Nevoffice application for Android and iOS, that allow '
                     'to record, save in SQLite '
@@ -86,12 +86,12 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 3,
-      logo: 'bikes/logo.png', 
+      logo: 'bikes/logo.jpg', 
       name: 'Bikes',
       images: [
-        'bikes/0.png',
-        'bikes/1.png',
-        'bikes/2.png',
+        'bikes/0.jpg',
+        'bikes/1.jpg',
+        'bikes/2.jpg',
       ],
       description: 'Demo application. List of bikes parsed from json. '
                     'Ability to remove items and add new.\n\n'
