@@ -1,53 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/index.dart';
-import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin{
+  AnimationController _controller;
+  Animation _animation;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1)
+    );
+    _animation = Tween(
+      begin: 0.0,
+      end: 1.0
+    ).animate(_controller);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
   
+
   @override
   Widget build(BuildContext context) {
+    _controller.forward();
 
-    return SafeArea(
-      child: Scaffold(
-        body: Consumer<HomeProvider>(
-          builder: (context, HomeProvider value, _) {
-            return MediaQuery.of(context).orientation == Orientation.portrait
-              ? ListView(
-                children: <Widget>[
-                  SizedBox(
-                    height: 130,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: value.cards.map((PortfolioDetails details){
-                        return PortfolioCard(details: details);
-                      }).toList(),
-                    )
-                  ),
-                  value.screen
-                ],
-              )
-              : Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 130,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: value.cards.map((PortfolioDetails details){
-                      return PortfolioCard(details: details);
-                    }).toList(),
-                  ),
-                ),
-                if(value.screen != null)
-                  Expanded(
-                    child: value.screen
-                  )
-              ]
-            );
-          }
-        )
-      )
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[
+          WelcomeScreen(animation: _animation),
+          PortfolioScreen(),
+          AboutScreen(),
+        ],
+      ),
     );
   }
 }

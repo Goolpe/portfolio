@@ -2,18 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:portfolio/index.dart';
 import 'package:provider/provider.dart';
 
-enum CardType{
-  commercial,
-  others
-}
-
 class HomeProvider with ChangeNotifier{
  
   final List<PortfolioDetails> cards = [
     PortfolioDetails(
       id: 0,
       logo: 'nevoffice/logo.jpg', 
-      name: 'Не в офисе\n[Nevoffice]', 
+      name: 'Nevoffice', 
       images: [
         'nevoffice/0.jpg',
         'nevoffice/1.jpg',
@@ -32,12 +27,11 @@ class HomeProvider with ChangeNotifier{
                     'State management: Provider\n'
                     'Framework / Language: Flutter / Dart,Java,Kotlin',
       googlePlayLink: "https://play.google.com/store/apps/details?id=ru.adsdesign.nevofise",
-      cardType: CardType.commercial
     ),
     PortfolioDetails(
       id: 1,
       logo: 'sprout/logo.jpg', 
-      name: 'Росток [Rostock]', 
+      name: 'Rostock', 
       images: [
         'sprout/0.jpg',
         'sprout/1.jpg',
@@ -58,12 +52,11 @@ class HomeProvider with ChangeNotifier{
                     'Framework / Language: Flutter / Dart,Java,Swift',
       googlePlayLink: "https://play.google.com/store/apps/details?id=ru.adsdesign.rostock_customer",
       appStoreLink: 'https://apps.apple.com/ru/app/%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%BA-%D1%80%D0%B0%D1%81%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D1%8B/id1473246473',
-      cardType: CardType.commercial
     ),
     PortfolioDetails(
       id: 2,
       logo: 'sprout_prom/logo.jpg', 
-      name: 'Росток Пром.\n[Rostock Promoter]', 
+      name: 'Rostock Promoter', 
       images: [
         'sprout_prom/0.jpg',
         'sprout_prom/1.jpg',
@@ -82,7 +75,6 @@ class HomeProvider with ChangeNotifier{
                     'Framework / Language: Flutter / Dart,Java,Swift',
       googlePlayLink: "https://play.google.com/store/apps/details?id=ru.adsdesign.rostock_promoter",
       appStoreLink: 'https://apps.apple.com/ru/app/%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%BA-%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D1%83%D1%82%D0%B5%D1%80/id1479981854',
-      cardType: CardType.commercial
     ),
     PortfolioDetails(
       id: 3,
@@ -101,18 +93,6 @@ class HomeProvider with ChangeNotifier{
                     'State management: Provider\n'
                     'Framework / Language: Flutter / Dart',
       githubLink: 'https://github.com/Goolpe/bikes',
-      cardType: CardType.others
-    ),
-    PortfolioDetails(
-      id: 4,
-      logo: 'barley_break.png', 
-      name: 'Barley Break', 
-      child: BarleyScreen(),
-      description:  'Demo game application.\n\n'
-                    'State management: Provider\n'
-                    'Framework / Language: Flutter / Dart',
-      githubLink: 'https://github.com/Goolpe/portfolio/blob/master/lib/src/screens/barley.dart',
-      cardType: CardType.others
     ),
   ];
 
@@ -124,8 +104,7 @@ class HomeProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  void show(PortfolioDetails card, BuildContext context){
-    Provider.of<BarleyBreakProvider>(context,listen: false).pause();
+  void show(PortfolioDetails card){
     _screen = card;
     notifyListeners();
   }

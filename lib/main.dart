@@ -21,7 +21,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Goolpe',
+        title: 'Arthur Khabirov',
+        theme: ThemeData(
+          fontFamily: 'UnicaOne'
+        ),
         debugShowCheckedModeBanner: false,
         builder: (BuildContext context, Widget child) {
           return ScrollConfiguration(
