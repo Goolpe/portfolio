@@ -53,21 +53,10 @@ class PortfolioScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Text(value.screen.description, style: TextStyle(fontFamily: 'Monda'),),
                     ),
-                    PortfolioSocialButton(
-                      padding: EdgeInsets.symmetric(vertical: 2),
-                      link: value.screen.googlePlayLink, 
-                      icon: MdiIcons.googlePlay, 
-                      title: 'google play'),
-                    PortfolioSocialButton(
-                      padding: EdgeInsets.symmetric(vertical: 2),
-                      link: value.screen.appStoreLink, 
-                      icon: MdiIcons.apple,
-                      title: 'app store'),
-                    PortfolioSocialButton(
-                      padding: EdgeInsets.symmetric(vertical: 2),
-                      link: value.screen.githubLink, 
-                      icon: MdiIcons.github, 
-                      title: 'github'),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _socialButtons(value, _portrait),
+                    )
                   ],
                 ),
               ),
@@ -126,20 +115,7 @@ class PortfolioScreen extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              children: <Widget>[
-                                PortfolioSocialButton(
-                                  link: value.screen.googlePlayLink, 
-                                  icon: MdiIcons.googlePlay, 
-                                  title: 'google play'),
-                                PortfolioSocialButton(
-                                  link: value.screen.appStoreLink, 
-                                  icon: MdiIcons.apple,
-                                  title: 'app store'),
-                                PortfolioSocialButton(
-                                  link: value.screen.githubLink, 
-                                  icon: MdiIcons.github, 
-                                  title: 'github'),
-                              ],
+                              children: _socialButtons(value, _portrait),
                             )
                           ],
                         ),
@@ -175,5 +151,25 @@ class PortfolioScreen extends StatelessWidget {
         onTap: () => Provider.of<HomeProvider>(context,listen: false).show(details),
       );
     }).toList();
+  }
+
+  List<Widget> _socialButtons(HomeProvider value, bool portrait){
+    return <Widget>[
+      PortfolioSocialButton(
+        padding: EdgeInsets.symmetric(vertical: portrait ? 2 : 0, horizontal: portrait ? 0 : 4),
+        link: value.screen.googlePlayLink,
+        icon: MdiIcons.googlePlay, 
+        title: 'google play'),
+      PortfolioSocialButton(
+        padding: EdgeInsets.symmetric(vertical: portrait ? 2 : 0, horizontal: portrait ? 0 : 4),
+        link: value.screen.appStoreLink,
+        icon: MdiIcons.apple,
+        title: 'app store'),
+      PortfolioSocialButton(
+        padding: EdgeInsets.symmetric(vertical: portrait ? 2 : 0, horizontal: portrait ? 0 : 4),
+        link: value.screen.githubLink,
+        icon: MdiIcons.github, 
+        title: 'github'),
+    ];
   }
 }

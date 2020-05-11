@@ -4,9 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 class PortfolioSocialButton extends StatelessWidget {
   PortfolioSocialButton({
     this.link,
-    this.icon,
-    this.title,
-    this.padding
+    @required this.icon,
+    @required this.title,
+    @required this.padding
   });
 
   final String link;
@@ -19,7 +19,7 @@ class PortfolioSocialButton extends StatelessWidget {
     return link == null
     ? SizedBox()
     : Padding(
-      padding: padding ?? EdgeInsets.symmetric(horizontal: 8.0),
+      padding: padding,
       child: FlatButton.icon(
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1),

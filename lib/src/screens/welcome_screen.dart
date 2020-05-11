@@ -56,13 +56,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
         _portrait
         ? Positioned(
-            left: 20,
             top: 20,
-            child: _social()
+            child: Row(
+              children: _social()
+            )
           )
         : Positioned(
           left: 50,
-          child: _social()
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: _social()
+          )
         ),
         Positioned(
           bottom: 50,
@@ -82,23 +86,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  Widget _social(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _icon(MdiIcons.github, 'https://github.com/Goolpe', 'GITHUB'),
-        _icon(MdiIcons.linkedin, 'https://www.linkedin.com/in/goolpe', 'LINKEDIN'),
-        _icon(_showGame 
-        ? MdiIcons.close 
-        : MdiIcons.cubeScan, '', 'TIMEKILLER', 
-        onTap: (){
-          if(_showGame){
-            Provider.of<BarleyBreakProvider>(context,listen: false).pause();
-          }
-          setState(() => _showGame = !_showGame);
-        })
-      ],
-    );
+  List<Widget> _social(){
+    return <Widget>[
+      _icon(MdiIcons.github, 'https://github.com/Goolpe', 'GITHUB'),
+      _icon(MdiIcons.linkedin, 'https://www.linkedin.com/in/goolpe', 'LINKEDIN'),
+      _icon(MdiIcons.telegram, 'https://t.me/goolpe_t', 'TELEGRAM'),
+      _icon(_showGame 
+      ? MdiIcons.close 
+      : MdiIcons.cubeScan, '', 'TIMEKILLER', 
+      onTap: (){
+        if(_showGame){
+          Provider.of<BarleyBreakProvider>(context,listen: false).pause();
+        }
+        setState(() => _showGame = !_showGame);
+      })
+    ];
   }
 
   Widget _icon(IconData icon, String link, String name, {Function onTap}){
@@ -115,7 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Icon(icon, size: 30), 
             Padding(
               padding: const EdgeInsets.only(left: 8),
-              child: Text(_show || MediaQuery.of(context).orientation == Orientation.portrait ? name : ''),
+              child: Text(_show ? name : ''),
             )
           ],
         ),

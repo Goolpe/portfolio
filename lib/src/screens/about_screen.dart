@@ -67,15 +67,21 @@ class AboutScreen extends StatelessWidget {
                 ),
                 PortfolioSocialButton(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  link: 'https://docs.google.com/document/d/1EerYQ8yHMnfGubLpffNUxlIUeYc71nFR2f4HPdECB4E/edit?usp=sharing',
+                  link: 'https://github.com/Goolpe',
                   icon: MdiIcons.github,
                   title: 'Github',
                 ),
                 PortfolioSocialButton(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  link: 'https://docs.google.com/document/d/1EerYQ8yHMnfGubLpffNUxlIUeYc71nFR2f4HPdECB4E/edit?usp=sharing',
+                  link: 'https://www.linkedin.com/in/goolpe',
                   icon: MdiIcons.linkedin,
                   title: 'LinkedIn',
+                ),
+                PortfolioSocialButton(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  link: 'https://t.me/goolpe_t',
+                  icon: MdiIcons.telegram,
+                  title: 'Telegram',
                 ),
               ],
             ),
