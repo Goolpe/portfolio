@@ -48,7 +48,7 @@ class AboutScreen extends StatelessWidget {
                 'with Bachelor of Applied Informatics.\n'
                 'Primarily programming in Dart (Flutter), Java, Kotlin, Javascript (React)\n\n'
                 'I’m native Russian speaker with intermediate English and basic knowledge of German. '
-                'Currently live in Saint-Petersbug, Russia.\n'
+                'Currently live in Saint-Petersburg, Russia.\n'
                 'If you have any questions or would like to further discuss my qualifications, '
                 'please don\'t hesitate to contact me.',
                 style: TextStyle(fontFamily: 'Monda')),
