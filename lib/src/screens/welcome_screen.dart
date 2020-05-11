@@ -104,7 +104,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget _icon(IconData icon, String link, String name, {Function onTap}){
-    return InkWell(
+    return MediaQuery.of(context).orientation == Orientation.portrait
+    ? IconButton(
+      icon: Icon(icon, size: 30),
+      onPressed: onTap ?? () async {
+        if (await canLaunch(link)) {
+          await launch(link);
+        }
+      },
+    )
+    : InkWell(
       onHover: (hover){
         setState(() {
           _show = hover;

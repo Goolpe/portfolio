@@ -6,7 +6,6 @@ class HomeProvider with ChangeNotifier{
   final List<PortfolioDetails> cards = [
     PortfolioDetails(
       id: 0,
-      logo: 'nevoffice/logo.jpg', 
       name: 'Nevoffice', 
       images: [
         'nevoffice/0.jpg',
@@ -29,7 +28,6 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 1,
-      logo: 'sprout/logo.jpg', 
       name: 'Rostock', 
       images: [
         'sprout/0.jpg',
@@ -54,7 +52,6 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 2,
-      logo: 'sprout_prom/logo.jpg', 
       name: 'Rostock Promoter', 
       images: [
         'sprout_prom/0.jpg',
@@ -77,7 +74,6 @@ class HomeProvider with ChangeNotifier{
     ),
     PortfolioDetails(
       id: 3,
-      logo: 'bikes/logo.jpg', 
       name: 'Bikes',
       images: [
         'bikes/0.jpg',

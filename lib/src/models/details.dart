@@ -6,7 +6,6 @@ class PortfolioDetails {
     this.id,
     this.child,
     @required this.name,
-    @required this.logo,
     this.images = const [],
     this.description = '',
     this.googlePlayLink,
@@ -17,7 +16,6 @@ class PortfolioDetails {
   final int id;
   final Widget child;
   final String name;
-  final String logo;
   final String description;
   final List<String> images;
   final String googlePlayLink;

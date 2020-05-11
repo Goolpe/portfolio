@@ -6,7 +6,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool _portrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    
+
     return _portrait
       ? Padding(
         padding: EdgeInsets.symmetric(horizontal: 24),
@@ -25,7 +25,7 @@ class AboutScreen extends StatelessWidget {
             Column(
               children: _children(_portrait)
             ),
-            Text('COPYRIGHT Ⓒ 2020 | Arthur Khabirov'.toUpperCase())
+            _footer()
           ]
         )
     );
@@ -43,10 +43,9 @@ class AboutScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
           ),
           Container(
-            child: Text('Passionate Mobile & Web Developer with 2 years professional experience.\n\n'
-                'My way started in Ufa, Russia, I finished Ufa State Petroleum University '
-                'with Bachelor of Applied Informatics,\nand then decided, '
-                'that I want to create products with latest techonlogies.\n\n'
+            child: Text('Passionate Mobile & Web Developer with 2 years professional experience.\n'
+                'I finished Ufa State Petroleum University '
+                'with Bachelor of Applied Informatics.\n'
                 'Primarily programming in Dart (Flutter), Java, Kotlin, Javascript (React)\n\n'
                 'I’m native Russian speaker with intermediate English and basic knowledge of German. '
                 'Currently live in Saint-Petersbug, Russia.\n'
@@ -91,8 +90,13 @@ class AboutScreen extends StatelessWidget {
       if(portrait)
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 24),
-          child: Text('COPYRIGHT Ⓒ 2020 | Arthur Khabirov'.toUpperCase()),
+          child: _footer()
         )
     ];
+  }
+
+  Widget _footer(){
+    final int _date = DateTime.now().year;
+    return Text('$_date | Created using Flutter'.toUpperCase());
   }
 }
