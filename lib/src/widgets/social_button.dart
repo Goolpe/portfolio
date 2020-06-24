@@ -21,10 +21,7 @@ class PortfolioSocialButton extends StatelessWidget {
     : Padding(
       padding: padding,
       child: FlatButton.icon(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1),
-          borderRadius: BorderRadius.circular(8)
-        ),
+        color: Colors.white,
         onPressed: () async {
           if (await canLaunch(link)) {
             await launch(link);

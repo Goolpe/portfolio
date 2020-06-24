@@ -22,9 +22,7 @@ class AboutScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: _children(_portrait)
-            ),
+            ..._children(_portrait),
             _footer()
           ]
         )
@@ -51,7 +49,7 @@ class AboutScreen extends StatelessWidget {
                 'Currently live in Saint-Petersburg, Russia.\n'
                 'If you have any questions or would like to further discuss my qualifications, '
                 'please don\'t hesitate to contact me.',
-                style: TextStyle(fontFamily: 'Monda')),
+            )
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),

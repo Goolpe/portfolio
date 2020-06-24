@@ -6,123 +6,59 @@ import 'package:provider/provider.dart';
 class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bool _portrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Consumer<HomeProvider>(
-      builder: (context, HomeProvider value, _) {
-        return _portrait
-        ? Container(
-          padding: EdgeInsets.symmetric(vertical: 24),
-          child: ListView(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text('Portfolio'.toUpperCase(), style: TextStyle(fontSize: 20)),
-                  Text('here are some works i am proud of', style: TextStyle(fontSize: 14),)
-                ],
-              ),
-              Container(
-                height: 70,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: _appNames(value, context)
-                ),
-              ),
-              Container(
-                height: 300,
-                child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  scrollDirection: Axis.horizontal,
-                  children: value.screen.images.map((String image) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 24),
-                      child: Image.network(URL_ASSET + image),
-                    );
-                  }).toList(),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(value.screen.name.toUpperCase(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: Text(value.screen.description, style: TextStyle(fontFamily: 'Monda'),),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _socialButtons(value, _portrait),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        )
-        : Container(
-          height: MediaQuery.of(context).size.height,
+      builder: (context, HomeProvider homeState, _) {
+        return Container(
           padding: EdgeInsets.symmetric(vertical: 50),
           child: Column(
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text('Portfolio'.toUpperCase(), style: TextStyle(fontSize: 40)),
-                  Text('here are some works i am proud of', style: TextStyle(fontSize: 20),)
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _appNames(value, context)
-              ),
-              Expanded(
-                child:Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 50),
+                color: Colors.blueGrey,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
                   children: <Widget>[
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        child: ListView(
-                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
-                          scrollDirection: Axis.horizontal,
-                          children: value.screen.images.map((String image) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
-                              child: Image.network(URL_ASSET + image),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                    Text('Portfolio'.toUpperCase(), style: TextStyle(color: Colors.white, fontSize: 40)),
+                    Text('Here are some works i am proud of', style: TextStyle(color: Colors.white, fontSize: 20),)
+                  ],
+                ),
+              ),
+              ...homeState.cards.map((details) => Container(
+                  color: details.backgroundColor,
+                  padding: EdgeInsets.all(50),
+                  child: Row(
+                    children: [
+                      Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: <Widget>[
-                                Text(value.screen.name.toUpperCase(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  child: Text(value.screen.description, style: TextStyle(fontFamily: 'Monda'),),
-                                ),
-                              ],
+                                if(details.logo != null)
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Image.asset(details.logo, height: 50)
+                                  ),
+                                Text(details.name, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28)),
+                              ]
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 32),
+                              child: Text(details.description, style: TextStyle(color: Colors.white, fontSize: 18)),
                             ),
                             Row(
-                              children: _socialButtons(value, _portrait),
+                              children: _socialButtons(details)
                             )
                           ],
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      Expanded(
+                        child: Image.asset('phone.png', height: 500)
+                      )
+                    ],
+                  ),
+                )
               ),
             ],
           ),
@@ -131,43 +67,21 @@ class PortfolioScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> _appNames(HomeProvider value, BuildContext context){
-    return value.cards.map((PortfolioDetails details){
-      return GestureDetector(
-        child: Container(
-          margin: EdgeInsets.fromLTRB(16, 25, 16, 0),
-          padding: EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            border: Border(bottom: BorderSide( 
-              color: value.screen == details 
-              ? Colors.black : Colors.white)
-            )
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(details.name.toUpperCase(), style: TextStyle(fontSize: 24)),
-          )
-        ),
-        onTap: () => Provider.of<HomeProvider>(context,listen: false).show(details),
-      );
-    }).toList();
-  }
-
-  List<Widget> _socialButtons(HomeProvider value, bool portrait){
+  List<Widget> _socialButtons(PortfolioDetails details){
     return <Widget>[
       PortfolioSocialButton(
-        padding: EdgeInsets.symmetric(vertical: portrait ? 2 : 0, horizontal: portrait ? 0 : 4),
-        link: value.screen.googlePlayLink,
+        padding: EdgeInsets.only(right: 8),
+        link: details.googlePlayLink,
         icon: MdiIcons.googlePlay, 
         title: 'google play'),
       PortfolioSocialButton(
-        padding: EdgeInsets.symmetric(vertical: portrait ? 2 : 0, horizontal: portrait ? 0 : 4),
-        link: value.screen.appStoreLink,
+        padding: EdgeInsets.only(right: 8),
+        link: details.appStoreLink,
         icon: MdiIcons.apple,
         title: 'app store'),
       PortfolioSocialButton(
-        padding: EdgeInsets.symmetric(vertical: portrait ? 2 : 0, horizontal: portrait ? 0 : 4),
-        link: value.screen.githubLink,
+        padding: EdgeInsets.only(right: 8),
+        link: details.githubLink,
         icon: MdiIcons.github, 
         title: 'github'),
     ];

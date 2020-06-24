@@ -10,7 +10,9 @@ class PortfolioDetails {
     this.description = '',
     this.googlePlayLink,
     this.appStoreLink,
-    this.githubLink
+    this.githubLink,
+    this.backgroundColor,
+    this.logo
   });
 
   final int id;
@@ -21,4 +23,6 @@ class PortfolioDetails {
   final String googlePlayLink;
   final String appStoreLink;
   final String githubLink;
+  final Color backgroundColor;
+  final String logo;
 }
