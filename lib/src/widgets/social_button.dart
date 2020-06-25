@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioSocialButton extends StatelessWidget {
-  PortfolioSocialButton({
+  const PortfolioSocialButton({
     this.link,
     @required this.icon,
     @required this.title,

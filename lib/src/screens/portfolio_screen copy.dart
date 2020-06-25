@@ -4,6 +4,8 @@ import 'package:portfolio/index.dart';
 import 'package:provider/provider.dart';
 
 class PortfolioScreen extends StatelessWidget {
+  const PortfolioScreen();
+
   @override
   Widget build(BuildContext context) {
     final bool _portrait = MediaQuery.of(context).orientation == Orientation.portrait;

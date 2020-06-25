@@ -3,15 +3,16 @@ import 'package:portfolio/index.dart';
 import 'package:provider/provider.dart';
 
 class BarleyScreen extends StatelessWidget {
-
+  const BarleyScreen();
+  
   @override
   Widget build(BuildContext context) {
     String _durationToTimer(Duration duration) {
       String twoDigits(int n) => 
         n >= 10 ? '$n' : '0$n';
 
-      final String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60).toInt());
-      final String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60).toInt());
+      final twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60).toInt());
+      final twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60).toInt());
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
 

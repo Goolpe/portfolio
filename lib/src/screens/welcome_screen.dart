@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({
+  const WelcomeScreen({
     @required this.animation
   });
 
@@ -21,7 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool _portrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    final _portrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Stack(
       alignment: Alignment.center,
@@ -38,6 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ? BarleyScreen()
                 : Column(
                   children: <Widget>[
+                    SelectableText('kek sok'),
                     Text('Arthur Khabirov'.toUpperCase(), style: TextStyle(fontSize: _portrait ? 30 : 50)),
                     Container(
                       height: 1,

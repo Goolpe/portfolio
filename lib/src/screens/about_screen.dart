@@ -5,11 +5,11 @@ import 'package:portfolio/index.dart';
 class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bool _portrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    final _portrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return _portrait
       ? Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ListView(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
@@ -18,7 +18,7 @@ class AboutScreen extends StatelessWidget {
       )
       : Container(
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 24),
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -94,7 +94,7 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _footer(){
-    final int _date = DateTime.now().year;
+    final _date = DateTime.now().year;
     return Text('$_date | Created using Flutter'.toUpperCase());
   }
 }

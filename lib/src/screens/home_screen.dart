@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/index.dart';
 
 class HomeScreen extends StatefulWidget {
-
+  const HomeScreen();
+  
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

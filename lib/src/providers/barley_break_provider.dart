@@ -59,7 +59,7 @@ class BarleyBreakProvider with ChangeNotifier{
     _counter = 0;
     _success = false;
     _matrixList = [[]];
-    for(int i = 0, mI = 0; i < list.length; i++){
+    for(var i = 0, mI = 0; i < list.length; i++){
       if(matrixList[mI].length == 4){
         matrixList.add([]);
         mI++;
@@ -96,7 +96,7 @@ class BarleyBreakProvider with ChangeNotifier{
     int el
   ){
     if(el != 0 && _barleyStatus == BarleyStatus.running){
-      int listIndex = index + matrixIndex*4;
+      var listIndex = index + matrixIndex*4;
       if(listIndex > 0){
         _update(matrixIndex, index, listIndex, -1, el);
       }
